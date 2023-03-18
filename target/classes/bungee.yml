@@ -1,0 +1,5 @@
+name: AdvancedParty
+version: '2.3.5'
+main: de.jardateien.simpleplarty.SimpleParty
+author: JarDateien
+description: A Simple Party System
