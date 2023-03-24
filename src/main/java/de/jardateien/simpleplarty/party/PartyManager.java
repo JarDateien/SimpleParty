@@ -1,5 +1,7 @@
 package de.jardateien.simpleplarty.party;
 
+import de.jardateien.simpleplarty.language.LanguageManager;
+import lombok.Getter;
 import net.md_5.bungee.api.connection.ProxiedPlayer;
 
 import java.util.*;
@@ -9,9 +11,14 @@ public class PartyManager {
     private final Map<ProxiedPlayer, Party> partys;
     private final List<Party> openPartys;
 
-    public PartyManager() {
+    @Getter
+    private final LanguageManager manager;
+
+    public PartyManager(LanguageManager manager) {
         this.partys = new HashMap<>();
         this.openPartys = new ArrayList<>();
+
+        this.manager = manager;
     }
 
     public void setParty(final ProxiedPlayer player, final Party party) {

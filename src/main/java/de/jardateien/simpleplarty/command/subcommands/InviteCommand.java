@@ -1,6 +1,7 @@
 package de.jardateien.simpleplarty.command.subcommands;
 
 import de.jardateien.simpleplarty.command.manager.SubCommand;
+import de.jardateien.simpleplarty.language.LanguageManager;
 import de.jardateien.simpleplarty.party.Party;
 import de.jardateien.simpleplarty.party.PartyManager;
 import de.jardateien.simpleplarty.utils.Component;
@@ -9,12 +10,18 @@ import net.md_5.bungee.api.connection.ProxiedPlayer;
 
 public class InviteCommand extends SubCommand {
 
-    public InviteCommand(PartyManager partyManager) { super(partyManager); }
+    private final LanguageManager manager;
+
+    public InviteCommand(PartyManager partyManager) {
+        super(partyManager);
+        this.manager = partyManager.getManager();
+    }
 
     @Override
     public void execute(ProxiedPlayer player, String[] args) {
+
         if(args.length <= 1) {
-            player.sendMessage(Component.PARTY, Component.text("§7/party invite <Spieler>"));
+            player.sendMessage(Component.PARTY, Component.text(this.manager.get(player, "party_invite_use")));
             return;
         }
 
@@ -25,13 +32,13 @@ public class InviteCommand extends SubCommand {
         }
 
         if(!party.isLeader(player)) {
-            player.sendMessage(Component.PARTY, Component.text("§cDu kannst keine Spieler in dieser Party einladen"));
+            player.sendMessage(Component.PARTY, Component.text(this.manager.get(player, "party_isnt_leader")));
             return;
         }
 
         var request = ProxyServer.getInstance().getPlayer(args[1]);
         if(request == null) {
-            player.sendMessage(Component.PARTY, Component.text("§e" + args[1] + " §cist nicht online!"));
+            player.sendMessage(Component.PARTY, Component.text(this.manager.get(player, "party_isnt_online", args[1])));
             return;
         }
 

@@ -2,7 +2,9 @@ package de.jardateien.simpleplarty.listener;
 
 import de.jardateien.simpleplarty.party.PartyManager;
 import net.md_5.bungee.api.connection.ProxiedPlayer;
+import net.md_5.bungee.api.event.LoginEvent;
 import net.md_5.bungee.api.event.PlayerDisconnectEvent;
+import net.md_5.bungee.api.event.PostLoginEvent;
 import net.md_5.bungee.api.event.ServerSwitchEvent;
 import net.md_5.bungee.api.plugin.Listener;
 import net.md_5.bungee.event.EventHandler;
@@ -11,6 +13,12 @@ public class PartyListener implements Listener {
 
     private final PartyManager partyManager;
     public PartyListener(PartyManager partyManager) { this.partyManager = partyManager; }
+
+
+    @EventHandler
+    public void onConnect(PostLoginEvent loginEvent) {
+        this.partyManager.getManager().add(loginEvent.getPlayer(), "Germany");
+    }
 
     @EventHandler
     public void onSwitch(ServerSwitchEvent switchEvent) {

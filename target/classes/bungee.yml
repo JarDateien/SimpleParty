@@ -1,5 +1,5 @@
-name: AdvancedParty
-version: '2.3.5'
+name: SimpleParty
+version: '2.4.5'
 main: de.jardateien.simpleplarty.SimpleParty
 author: JarDateien
 description: A Simple PartySystem for Everyone
