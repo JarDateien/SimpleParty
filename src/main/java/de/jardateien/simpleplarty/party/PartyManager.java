@@ -1,7 +1,5 @@
 package de.jardateien.simpleplarty.party;
 
-import de.jardateien.simpleplarty.language.LanguageManager;
-import lombok.Getter;
 import net.md_5.bungee.api.connection.ProxiedPlayer;
 
 import java.util.*;
@@ -9,16 +7,9 @@ import java.util.*;
 public class PartyManager {
 
     private final Map<ProxiedPlayer, Party> partys;
-    private final List<Party> openPartys;
 
-    @Getter
-    private final LanguageManager manager;
-
-    public PartyManager(LanguageManager manager) {
+    public PartyManager() {
         this.partys = new HashMap<>();
-        this.openPartys = new ArrayList<>();
-
-        this.manager = manager;
     }
 
     public void setParty(final ProxiedPlayer player, final Party party) {
@@ -52,10 +43,8 @@ public class PartyManager {
         }
     }
 
-    public boolean isPartyOpen(final Party party) { return this.openPartys.contains(party); }
     public Party getParty(final ProxiedPlayer player) { return this.partys.get(player); }
-    public Set<ProxiedPlayer> getPlayers() { return this.partys.keySet(); }
 
-    private int getRandom(final int min, final int max) { return new Random().nextInt(max - min + 1) + min; }
-    private ProxiedPlayer getMember(final Party party) { return party.getMembers().get(this.getRandom(0, party.getSize())); }
+    private int getRandom(final int max) { return new Random().nextInt(max + 1); }
+    private ProxiedPlayer getMember(final Party party) { return party.getMembers().get(this.getRandom(party.getSize())); }
 }

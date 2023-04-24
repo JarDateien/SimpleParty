@@ -1,13 +1,13 @@
 package de.jardateien.simpleplarty.command.subcommands;
 
 import de.jardateien.simpleplarty.command.manager.SubCommand;
-import de.jardateien.simpleplarty.party.PartyManager;
 import de.jardateien.simpleplarty.utils.Component;
+import de.jardateien.simpleplarty.utils.ControllManager;
 import net.md_5.bungee.api.ProxyServer;
 import net.md_5.bungee.api.connection.ProxiedPlayer;
 
 public class AcceptCommand extends SubCommand {
-    public AcceptCommand(PartyManager partyManager) { super(partyManager); }
+    public AcceptCommand(ControllManager controllManager) { super(controllManager); }
 
     @Override
     public void execute(ProxiedPlayer player, String[] args) {
@@ -35,7 +35,7 @@ public class AcceptCommand extends SubCommand {
         }
 
         if(!requestParty.hasRequest(player)) {
-            player.sendMessage(Component.PARTY, Component.text("§7[§5Party§7] §cDu wurdest nicht in diese Party eingeladen!"));
+            player.sendMessage(Component.PARTY, Component.text("§cDu wurdest nicht in diese Party eingeladen!"));
             return;
         }
 

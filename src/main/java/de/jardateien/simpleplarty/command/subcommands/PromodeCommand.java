@@ -1,13 +1,13 @@
 package de.jardateien.simpleplarty.command.subcommands;
 
 import de.jardateien.simpleplarty.command.manager.SubCommand;
-import de.jardateien.simpleplarty.party.PartyManager;
 import de.jardateien.simpleplarty.utils.Component;
+import de.jardateien.simpleplarty.utils.ControllManager;
 import net.md_5.bungee.api.ProxyServer;
 import net.md_5.bungee.api.connection.ProxiedPlayer;
 
 public class PromodeCommand extends SubCommand {
-    public PromodeCommand(PartyManager partyManager) { super(partyManager); }
+    public PromodeCommand(ControllManager controllManager) { super(controllManager); }
 
     @Override
     public void execute(ProxiedPlayer player, String[] args) {

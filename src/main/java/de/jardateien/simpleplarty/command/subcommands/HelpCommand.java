@@ -1,42 +1,41 @@
 package de.jardateien.simpleplarty.command.subcommands;
 
 import de.jardateien.simpleplarty.command.manager.SubCommand;
-import de.jardateien.simpleplarty.party.PartyManager;
 import de.jardateien.simpleplarty.utils.Component;
+import de.jardateien.simpleplarty.utils.ControllManager;
 import net.md_5.bungee.api.connection.ProxiedPlayer;
 
-import java.util.Map;
-
 public class HelpCommand extends SubCommand {
-    public HelpCommand(PartyManager partyManager) { super(partyManager); }
+    public HelpCommand(ControllManager controllManager) { super(controllManager); }
 
     @Override
     public void execute(ProxiedPlayer player, String[] args) {
         var search = this.search(args);
-        player.sendMessage(Component.PARTY, Component.text("§6Partyverwaltung §8(§7" + search +" §8/ §7" + 3 + "§8)"));
+        player.sendMessage(Component.PARTY, this.languageManager.get(player, "party_management", String.valueOf(search)));
 
         switch (search) {
             case 1 -> {
-                player.sendMessage(Component.text("§e /party invite <Spieler> §8| §7Lade Spieler in die Party ein"));
-                player.sendMessage(Component.text("§e /party accept <Spieler> §8| §7Nimm eine Party Anfrage an"));
-                player.sendMessage(Component.text("§e /party deny <Spieler> §8| §7Lehn eine Party Anfrage ab"));
-                player.sendMessage(Component.text("§e /party list §8| §7Liste alle Party Mitglieder auf"));
-                player.sendMessage(Component.text("§e /party leave §8| §7Verlasse eine Party"));
+                player.sendMessage(this.languageManager.get(player, "invite_use_description"));
+                player.sendMessage(this.languageManager.get(player, "accept_use_description"));
+                player.sendMessage(this.languageManager.get(player, "deny_use_description"));
+                player.sendMessage(this.languageManager.get(player, "list_use_description"));
+                player.sendMessage(this.languageManager.get(player, "leave_use_description"));
             }
 
             case 2 -> {
-                player.sendMessage(Component.text("§e /party jump §8| §7Spring auf den Server des Leiters!"));
-                player.sendMessage(Component.text("§e /party promode <Spieler> §8| §7Befördere ein Spieler aus der Party"));
-                player.sendMessage(Component.text("§e /party demote <Spieler> §8| §7Degradiere ein Spieler aus der Party"));
-                player.sendMessage(Component.text("§e /party kick <Spieler> §8| §7Kickt ein Spieler aus der Party"));
-                player.sendMessage(Component.text("§e /party join <Spieler> §8| §7Kickt ein Spieler aus der Party"));
+                player.sendMessage(this.languageManager.get(player, "jump_use_description"));
+                player.sendMessage(this.languageManager.get(player, "promode_use_description"));
+                player.sendMessage(this.languageManager.get(player, "demote_use_description"));
+                player.sendMessage(this.languageManager.get(player, "kick_use_description"));
+                player.sendMessage(this.languageManager.get(player, "join_use_description"));
             }
 
             case 3 -> {
-                player.sendMessage(Component.text("§e /party toggle <toggle> §8| §7Spring auf den Server des Leiters!"));
-                player.sendMessage(Component.text("§e /party pull §8| §7Sendet alle Spieler auf deinen Server"));
-                player.sendMessage(Component.text("§e /party help §8| §7Spring auf den Server des Leiters!"));
-                player.sendMessage(Component.text("§e /party chat §8| §7Spring auf den Server des Leiters!"));
+                player.sendMessage(this.languageManager.get(player, "language_use_description"));
+                player.sendMessage(this.languageManager.get(player, "toggle_use_description"));
+                player.sendMessage(this.languageManager.get(player, "pull_use_description"));
+                player.sendMessage(this.languageManager.get(player, "help_use_description"));
+                player.sendMessage(this.languageManager.get(player, "chat_use_description"));
             }
         }
     }
@@ -46,5 +45,4 @@ public class HelpCommand extends SubCommand {
         try { return Math.min(Integer.parseInt(args[1]), 3); }
         catch (NumberFormatException exception) { return 1; }
     }
-
 }

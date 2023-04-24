@@ -2,18 +2,16 @@ package de.jardateien.simpleplarty.command;
 
 import de.jardateien.simpleplarty.command.manager.Command;
 import de.jardateien.simpleplarty.command.subcommands.*;
-import de.jardateien.simpleplarty.party.PartyManager;
+import de.jardateien.simpleplarty.utils.ControllManager;
 import net.md_5.bungee.api.CommandSender;
 import net.md_5.bungee.api.connection.ProxiedPlayer;
 
 public class PartyCommand extends Command {
 
-    private final PartyManager partyManager;
 
-    public PartyCommand(PartyManager partyManager) {
+    public PartyCommand(ControllManager controllManager) {
         super("party");
-        this.partyManager = partyManager;
-        this.registerSubCommands();
+        this.registerSubCommands(controllManager);
     }
 
     @Override
@@ -35,20 +33,21 @@ public class PartyCommand extends Command {
     }
 
     @Override
-    public void registerSubCommands() {
-        this.commandManager.registerCommand("promode", new PromodeCommand(this.partyManager));
-        this.commandManager.registerCommand("demote", new DemoteCommand(this.partyManager));
-        this.commandManager.registerCommand("accept", new AcceptCommand(this.partyManager));
-        this.commandManager.registerCommand("invite", new InviteCommand(this.partyManager));
-        this.commandManager.registerCommand("toggle", new ToggleCommand(this.partyManager));
-        this.commandManager.registerCommand("leave", new LeaveCommand(this.partyManager));
-        this.commandManager.registerCommand("jump", new JumpCommand(this.partyManager));
-        this.commandManager.registerCommand("chat", new ChatCommand(this.partyManager));
-        this.commandManager.registerCommand("deny", new DenyCommand(this.partyManager));
-        this.commandManager.registerCommand("kick", new KickCommand(this.partyManager));
-        this.commandManager.registerCommand("pull", new PullCommand(this.partyManager));
-        this.commandManager.registerCommand("help", new HelpCommand(this.partyManager));
-        this.commandManager.registerCommand("list", new ListCommand(this.partyManager));
-        this.commandManager.registerCommand("join", new JoinCommand(this.partyManager));
+    public void registerSubCommands(ControllManager controllManager) {
+        this.commandManager.registerCommand("language", new LanguageCommand(controllManager));
+        this.commandManager.registerCommand("promode", new PromodeCommand(controllManager));
+        this.commandManager.registerCommand("demote", new DemoteCommand(controllManager));
+        this.commandManager.registerCommand("accept", new AcceptCommand(controllManager));
+        this.commandManager.registerCommand("invite", new InviteCommand(controllManager));
+        this.commandManager.registerCommand("toggle", new ToggleCommand(controllManager));
+        this.commandManager.registerCommand("leave", new LeaveCommand(controllManager));
+        this.commandManager.registerCommand("jump", new JumpCommand(controllManager));
+        this.commandManager.registerCommand("chat", new ChatCommand(controllManager));
+        this.commandManager.registerCommand("deny", new DenyCommand(controllManager));
+        this.commandManager.registerCommand("kick", new KickCommand(controllManager));
+        this.commandManager.registerCommand("pull", new PullCommand(controllManager));
+        this.commandManager.registerCommand("help", new HelpCommand(controllManager));
+        this.commandManager.registerCommand("list", new ListCommand(controllManager));
+        this.commandManager.registerCommand("join", new JoinCommand(controllManager));
     }
 }

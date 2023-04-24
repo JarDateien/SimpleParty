@@ -1,5 +1,7 @@
 package de.jardateien.simpleplarty.command.manager;
 
+import de.jardateien.simpleplarty.utils.ControllManager;
+
 public abstract class Command extends net.md_5.bungee.api.plugin.Command {
     protected final CommandManager commandManager;
 
@@ -8,5 +10,5 @@ public abstract class Command extends net.md_5.bungee.api.plugin.Command {
         this.commandManager = new CommandManager();
     }
 
-    public abstract void registerSubCommands();
+    public abstract void registerSubCommands(ControllManager controllManager);
 }
