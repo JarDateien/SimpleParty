@@ -3,6 +3,7 @@ package de.jardateien.simpleplarty.command.subcommands;
 import de.jardateien.simpleplarty.command.manager.SubCommand;
 import de.jardateien.simpleplarty.utils.Component;
 import de.jardateien.simpleplarty.utils.ControllManager;
+import net.md_5.bungee.api.ChatColor;
 import net.md_5.bungee.api.ProxyServer;
 import net.md_5.bungee.api.connection.ProxiedPlayer;
 
@@ -12,13 +13,15 @@ public class DenyCommand extends SubCommand {
     @Override
     public void execute(ProxiedPlayer player, String[] args) {
         if(args.length <= 1) {
-            player.sendMessage(Component.PARTY, Component.text("§7/party deny <Spieler>"));
+            player.sendMessage(Component.PARTY, this.languageManager.get(player, "use_deny_help"));
             return;
         }
 
         var request = ProxyServer.getInstance().getPlayer(args[1]);
         if(request == null) {
-            player.sendMessage(Component.PARTY, Component.text("§e" + args[1] + " §cist nicht online!"));
+
+            ChatColor.of("");
+            player.sendMessage(Component.PARTY, this.languageManager.get(player, "player_isnt_online" , args[1]));
             return;
         }
 

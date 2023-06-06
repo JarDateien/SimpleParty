@@ -30,7 +30,7 @@ public class KickCommand extends SubCommand {
         }
 
         if(!party.isLeader(player)) {
-            player.sendMessage(Component.PARTY, Component.text("§cDu kannst keine Spieler aus dieser Party kicken!"));
+            player.sendMessage(Component.PARTY, this.languageManager.get(player, "player_isnt_leader"));
             return;
         }
 

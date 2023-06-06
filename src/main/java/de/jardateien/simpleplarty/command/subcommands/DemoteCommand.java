@@ -12,49 +12,49 @@ public class DemoteCommand extends SubCommand {
     @Override
     public void execute(ProxiedPlayer player, String[] args) {
         if(args.length <= 1) {
-            player.sendMessage(Component.PARTY, Component.text("§7/party demote <Spieler>"));
+            player.sendMessage(Component.PARTY, this.languageManager.get(player, "use_demote_help"));
             return;
         }
 
         var party = this.partyManager.getParty(player);
         if(party == null) {
-            player.sendMessage(Component.PARTY, Component.text("§cDu bist in keiner Party!"));
+            player.sendMessage(Component.PARTY, this.languageManager.get(player, "player_isnt_in_party"));
             return;
         }
 
         if(!party.isLeader(player)) {
-            player.sendMessage(Component.PARTY, Component.text("§cDu bist nicht der Party Leiter!"));
+            player.sendMessage(Component.PARTY, this.languageManager.get(player, "player_isnt_leader"));
             return;
         }
 
         if(party.isLeader(player)) {
-            player.sendMessage(Component.PARTY, Component.text("§cDu kannst dir die Leitung nicht so entfernen!"));
+            player.sendMessage(Component.PARTY, this.languageManager.get(player, "player_cant_remove_leader"));
             return;
         }
 
         var request = ProxyServer.getInstance().getPlayer(args[1]);
         if(request == null) {
-            player.sendMessage(Component.PARTY, Component.text("§e" + args[1] + " §cist nicht online!"));
+            player.sendMessage(Component.PARTY, this.languageManager.get(player, "player_isnt_online", args[1]));
             return;
         }
 
         var requestParty = this.partyManager.getParty(request);
         if(requestParty == null) {
-            player.sendMessage(Component.PARTY, Component.text("§cDer Spieler ist in keiner Party"));
+            player.sendMessage(Component.PARTY, this.languageManager.get(player, "player_dont_have_party"));
             return;
         }
 
         if(!party.isInParty(request)) {
-            player.sendMessage(Component.PARTY, Component.text("§cDer Spieler ist nicht in deiner Party!"));
+            player.sendMessage(Component.PARTY, this.languageManager.get(player, "player_is_in_my_party"));
             return;
         }
 
         if(!party.isModerator(player)) {
-            player.sendMessage(Component.PARTY, Component.text("§cDer Spieler ist kein Moderator!"));
+            player.sendMessage(Component.PARTY, this.languageManager.get(player, "player_is_not_moderator"));
             return;
         }
 
         party.removeModerator(player);
-        party.sendMembers("§a" + player.getName() + " §7ist kein Moderator mehr!");
+        party.getMembers().forEach(members -> members.sendMessage(this.languageManager.get(members, "player_is_not_longer_moderator", player.getName())));
     }
 }

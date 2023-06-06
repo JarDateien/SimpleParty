@@ -1,5 +1,6 @@
 package de.jardateien.simpleplarty.language;
 
+import de.jardateien.simpleplarty.utils.ColorUtil;
 import de.jardateien.simpleplarty.utils.Component;
 import net.md_5.bungee.api.chat.TextComponent;
 import net.md_5.bungee.api.connection.ProxiedPlayer;
@@ -34,12 +35,12 @@ public class LanguageManager {
         });
     }
 
-    public TextComponent get(final ProxiedPlayer player, final String key, String replace) {
-        return Component.text(this.language(player).get(key).replace("{player}", replace).replace("&", "§"));
+    public TextComponent get(final ProxiedPlayer player, final String key, final String replace) {
+        return Component.text(ColorUtil.translate(player, this.language(player).get(key).replace("{player}", replace)));
     }
 
     public TextComponent get(final ProxiedPlayer player, final String key) {
-        return Component.text(this.language(player).get(key).replace("&", "§"));
+        return Component.text(ColorUtil.translate(player, this.language(player).get(key)));
     }
 
     public List<Language> getLanguages() { return this.languages.keySet().stream().toList(); }

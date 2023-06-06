@@ -1,5 +1,6 @@
 package de.jardateien.simpleplarty.language;
 
+import de.jardateien.simpleplarty.utils.ColorUtil;
 import lombok.Getter;
 import net.md_5.bungee.config.Configuration;
 import net.md_5.bungee.config.ConfigurationProvider;

@@ -3,6 +3,7 @@ package de.jardateien.simpleplarty;
 import de.jardateien.simpleplarty.command.PartyCommand;
 import de.jardateien.simpleplarty.listener.LanguageListener;
 import de.jardateien.simpleplarty.listener.PartyListener;
+import de.jardateien.simpleplarty.utils.ColorUtil;
 import de.jardateien.simpleplarty.utils.Component;
 import de.jardateien.simpleplarty.utils.ControllManager;
 import de.jardateien.simpleplarty.utils.UpdateChecker;
@@ -11,13 +12,15 @@ import net.md_5.bungee.api.plugin.Plugin;
 
 public final class SimpleParty extends Plugin {
 
-    private ControllManager controll;
+    private ControllManager controls;
 
     @Override
     public void onEnable() {
-        var checker = new UpdateChecker(this, "simpleparty", 109313);
-        var logger = this.getLogger();
+        var checker = new UpdateChecker(this, "100-sale-⏳-1-8-1-19-4-⭐-simpleparty-⚡-custom-unlimited-languages-✨", 109313);
+
         checker.getVersion(version -> {
+            var logger = this.getLogger();
+
             if (this.getDescription().getVersion().equals(version)) {
                 logger.info("There is not a new update available.");
                 return;
@@ -28,20 +31,20 @@ public final class SimpleParty extends Plugin {
             checker.update();
         });
 
-        this.controll = new ControllManager(this);
+        this.controls = new ControllManager(this);
 
         var proxy = this.getProxy();
         this.showDisplay(proxy);
 
         var pluginManger = proxy.getPluginManager();
-        pluginManger.registerCommand(this, new PartyCommand(this.controll));
-        pluginManger.registerListener(this, new PartyListener(this.controll));
-        pluginManger.registerListener(this, new LanguageListener(this.controll));
+        pluginManger.registerCommand(this, new PartyCommand(this.controls));
+        pluginManger.registerListener(this, new PartyListener(this.controls));
+        pluginManger.registerListener(this, new LanguageListener(this.controls));
     }
 
     @Override
     public void onDisable() {
-        this.controll.getLanguageManager().save();
+        this.controls.getLanguageManager().save();
     }
 
     private void showDisplay(ProxyServer proxy) {

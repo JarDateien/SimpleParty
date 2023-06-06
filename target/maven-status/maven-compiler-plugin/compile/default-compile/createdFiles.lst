@@ -7,6 +7,7 @@ de\jardateien\simpleplarty\mysql\MySQLManager.class
 de\jardateien\simpleplarty\language\Language.class
 de\jardateien\simpleplarty\command\subcommands\JoinCommand.class
 de\jardateien\simpleplarty\command\subcommands\DenyCommand.class
+de\jardateien\simpleplarty\utils\ColorUtil.class
 de\jardateien\simpleplarty\command\subcommands\AcceptCommand.class
 de\jardateien\simpleplarty\command\manager\CommandManager.class
 de\jardateien\simpleplarty\command\subcommands\LeaveCommand.class

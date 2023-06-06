@@ -12,30 +12,30 @@ public class AcceptCommand extends SubCommand {
     @Override
     public void execute(ProxiedPlayer player, String[] args) {
         if(args.length <= 1) {
-            player.sendMessage(Component.PARTY, Component.text("§7/party accept <Spieler>"));
+            player.sendMessage(Component.PARTY, this.languageManager.get(player, "use_accept_help"));
             return;
         }
 
         var party = this.partyManager.getParty(player);
         if(party != null) {
-            player.sendMessage(Component.PARTY, Component.text("§cDu bist bereits in einer Party!"));
+            player.sendMessage(Component.PARTY, this.languageManager.get(player, "player_already_in_party"));
             return;
         }
 
         var request = ProxyServer.getInstance().getPlayer(args[1]);
         if(request == null) {
-            player.sendMessage(Component.PARTY, Component.text("§e" + args[1] + " §cist nicht online!"));
+            player.sendMessage(Component.PARTY, this.languageManager.get(player, "player_isnt_online", args[1]));
             return;
         }
 
         var requestParty = this.partyManager.getParty(request);
         if(requestParty == null) {
-            player.sendMessage(Component.PARTY, Component.text("§cDieser Spieler hat keine Party"));
+            player.sendMessage(Component.PARTY, this.languageManager.get(player, "player_dont_have_party"));
             return;
         }
 
         if(!requestParty.hasRequest(player)) {
-            player.sendMessage(Component.PARTY, Component.text("§cDu wurdest nicht in diese Party eingeladen!"));
+            player.sendMessage(Component.PARTY, this.languageManager.get(player, "player_dont_have_request"));
             return;
         }
 
