@@ -17,6 +17,6 @@ public class CreateCommand extends SubCommand {
         }
 
         manager.joinParty(player, new Party(player));
-        player.sendMessage(Component.PARTY, Component.text("<gray>Du hast erfolgreich eine Party erstellt (ROT)</gray>"));
+        player.sendMessage(Component.PARTY, Component.text("<gray>Du hast erfolgreich eine <bold>Party</bold> erstellt</gray>"));
     }
 }
