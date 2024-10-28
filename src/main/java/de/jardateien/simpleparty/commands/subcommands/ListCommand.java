@@ -6,7 +6,14 @@ import de.jardateien.simpleparty.SimpleParty;
 import net.md_5.bungee.api.ProxyServer;
 import net.md_5.bungee.api.connection.ProxiedPlayer;
 
+import java.util.List;
+
 public class ListCommand extends SubCommand {
+
+    @Override
+    public List<String> complete(ProxiedPlayer player, String[] args) {
+        return List.of("");
+    }
 
     @Override
     public void execute(ProxiedPlayer player, String[] args) {

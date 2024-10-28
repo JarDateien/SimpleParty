@@ -3,8 +3,17 @@ package de.jardateien.simpleparty.commands.subcommands;
 import de.jardateien.simpleparty.commands.manager.SubCommand;
 import de.jardateien.simpleparty.utils.Math;
 import net.md_5.bungee.api.connection.ProxiedPlayer;
+import net.md_5.bungee.api.event.TabCompleteEvent;
+
+import java.util.Arrays;
+import java.util.List;
 
 public class HelpCommand extends SubCommand {
+
+    @Override
+    public List<String> complete(ProxiedPlayer player, String[] args) {
+        return args.length >= 2 ? List.of("") : Arrays.asList("help", "invite", "accept", "decline", "list", "leave", "jump", "promode", "demote", "kick", "join", "toggle", "pull", "chat");
+    }
 
     @Override
     public void execute(ProxiedPlayer player, String[] args) {

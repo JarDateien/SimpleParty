@@ -4,9 +4,12 @@ import de.jardateien.simpleparty.commands.manager.CommandManager;
 import de.jardateien.simpleparty.commands.subcommands.*;
 import net.md_5.bungee.api.CommandSender;
 import net.md_5.bungee.api.connection.ProxiedPlayer;
+import net.md_5.bungee.api.event.TabCompleteEvent;
 import net.md_5.bungee.api.plugin.Command;
+import net.md_5.bungee.api.plugin.Listener;
+import net.md_5.bungee.event.EventHandler;
 
-public class PartyCommand extends Command {
+public class PartyCommand extends Command implements Listener {
 
     private final CommandManager manager;
     private HelpCommand defaultCommand;
@@ -14,6 +17,25 @@ public class PartyCommand extends Command {
     public PartyCommand() {
         super("party");
         this.manager = new CommandManager();
+    }
+
+    @EventHandler
+    public void onTabComplete(TabCompleteEvent event) {
+        if (!(event.getSender() instanceof ProxiedPlayer player)) return;
+
+        var command = event.getCursor().toLowerCase();
+        if (!command.startsWith("/" + this.getName())) return;
+
+        var args = command.split(" ");
+        if (args.length <= 1) {
+            event.getSuggestions().addAll(this.defaultCommand.complete(player, args));
+            return;
+        }
+
+        var subCommand = this.manager.get(args[1]);
+        if (subCommand == null) return;
+
+        event.getSuggestions().addAll(subCommand.complete(player, args));
     }
 
     @Override

@@ -5,8 +5,19 @@ import de.jardateien.simpleparty.party.Party;
 import de.jardateien.simpleparty.SimpleParty;
 import net.md_5.bungee.api.ProxyServer;
 import net.md_5.bungee.api.connection.ProxiedPlayer;
+import net.md_5.bungee.api.event.TabCompleteEvent;
+
+import java.util.LinkedList;
+import java.util.List;
 
 public class InviteCommand extends SubCommand {
+
+    @Override
+    public List<String> complete(ProxiedPlayer player, String[] args) {
+        List<String> list = new LinkedList<>();
+        player.getServer().getInfo().getPlayers().stream().filter(players -> !players.getUniqueId().equals(player.getUniqueId())).forEach(players -> list.add(players.getName()));
+        return args.length >= 3 ? List.of("") : list;
+    }
 
     @Override
     public void execute(ProxiedPlayer player, String[] args) {

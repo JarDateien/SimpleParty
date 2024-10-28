@@ -12,7 +12,7 @@ import java.util.regex.Pattern;
 public class MultiColors {
 
     private final Pattern pattern = Pattern.compile("#[a-fA-F0-9]{6}");
-    private final String[] defaultColors = new String[] { "#000000", "#0000AA", "#00AA00", "#00AAAA", "#AA0000", "#AA00AA", "#FFAA00", "#AAAAAA", "#555555", "#5555FF", "#55FF55", "#55FFFF", "#FF5555", "#FF55FF", "#FFFF55", "#FFFFFF" } ;
+    //private final String[] defaultColors = new String[] { "#000000", "#0000AA", "#00AA00", "#00AAAA", "#AA0000", "#AA00AA", "#FFAA00", "#AAAAAA", "#555555", "#5555FF", "#55FF55", "#55FFFF", "#FF5555", "#FF55FF", "#FFFF55", "#FFFFFF" } ;
 
     private List<String> fade(String hexColor1, String hexColor2, int steps) {
         var color1 = Color.decode(hexColor1);
@@ -45,8 +45,8 @@ public class MultiColors {
             var startEdit = String.format("<%s>", color.getName());
             var endEdit = String.format("</%s>", color.getName());
             if(!input.contains(startEdit) || !input.contains(endEdit)) continue;
-            input = input.replace(startEdit, color.toString());
-            input = input.replace(endEdit, ChatColor.RESET.toString());
+            input = input.replaceAll(startEdit, color.toString());
+            input = input.replaceAll(endEdit, ChatColor.RESET.toString());
         }
 
         while (input.contains("<color:") && input.contains("</color>")) {
@@ -83,7 +83,7 @@ public class MultiColors {
         var match = pattern.matcher(input);
         while (match.find()) {
             var color = input.substring(match.start(), match.end());
-            input = input.replace(color, ChatColor.of(color).toString());
+            input = input.replace(color, ChatColor.of(color) + "");
             match = pattern.matcher(input);
         }
 

@@ -15,6 +15,10 @@ public class PartyManager {
         this.openParties = new LinkedList<>();
     }
 
+    public List<Party> getPublic() {
+        return this.openParties;
+    }
+
     public Collection<Party> getValues() {
         return this.parties.values();
     }

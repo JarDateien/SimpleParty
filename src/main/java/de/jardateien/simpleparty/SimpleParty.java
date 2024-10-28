@@ -22,7 +22,10 @@ public final class SimpleParty extends Plugin {
 
         var manager = this.getProxy().getPluginManager();
         manager.registerListener(this, new PartyListener());
-        manager.registerCommand(this, new PartyCommand().registerSubCommands());
+
+        var partyCommand = new PartyCommand();
+        manager.registerListener(this, partyCommand);
+        manager.registerCommand(this, partyCommand.registerSubCommands());
 
         this.showDisplay();
     }

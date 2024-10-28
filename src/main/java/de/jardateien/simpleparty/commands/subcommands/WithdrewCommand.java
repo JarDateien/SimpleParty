@@ -4,8 +4,16 @@ import de.jardateien.simpleparty.commands.manager.SubCommand;
 import de.jardateien.simpleparty.SimpleParty;
 import net.md_5.bungee.api.ProxyServer;
 import net.md_5.bungee.api.connection.ProxiedPlayer;
+import net.md_5.bungee.api.event.TabCompleteEvent;
+
+import java.util.List;
 
 public class WithdrewCommand extends SubCommand {
+
+    @Override
+    public List<String> complete(ProxiedPlayer player, String[] args) {
+        return List.of("");
+    }
 
     @Override
     public void execute(ProxiedPlayer player, String[] args) {

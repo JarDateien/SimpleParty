@@ -4,8 +4,15 @@ import de.jardateien.simpleparty.commands.manager.SubCommand;
 import de.jardateien.simpleparty.SimpleParty;
 import de.jardateien.simpleparty.utils.Component;
 import net.md_5.bungee.api.connection.ProxiedPlayer;
+import net.md_5.bungee.api.event.TabCompleteEvent;
+
+import java.util.Arrays;
+import java.util.List;
 
 public class ChatCommand extends SubCommand {
+    @Override
+    public List<String> complete(ProxiedPlayer player, String[] args) { return List.of(""); }
+
     @Override
     public void execute(ProxiedPlayer player, String[] args) {
         if(args.length <= 1) {

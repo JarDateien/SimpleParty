@@ -5,10 +5,25 @@ import de.jardateien.simpleparty.party.Party;
 import de.jardateien.simpleparty.utils.Component;
 import de.jardateien.simpleparty.SimpleParty;
 import net.md_5.bungee.api.connection.ProxiedPlayer;
+import net.md_5.bungee.api.event.TabCompleteEvent;
 
 import java.util.LinkedList;
+import java.util.List;
 
 public class RequestsCommand extends SubCommand {
+
+    @Override
+    public List<String> complete(ProxiedPlayer player, String[] args) {
+
+        List<String> list = new LinkedList<>();
+        for (Party party : SimpleParty.getInstance().getPartyManager().getValues()) {
+            if(!party.hasRequested(player)) continue;
+            if(list.contains(party.getLeader().getName())) continue;
+            list.add(party.getLeader().getName());
+        }
+
+        return args.length >= 3 ? List.of("") : list;
+    }
 
     @Override
     public void execute(ProxiedPlayer player, String[] args) {

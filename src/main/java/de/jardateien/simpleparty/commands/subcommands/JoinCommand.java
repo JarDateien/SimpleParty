@@ -4,8 +4,22 @@ import de.jardateien.simpleparty.commands.manager.SubCommand;
 import de.jardateien.simpleparty.SimpleParty;
 import net.md_5.bungee.api.ProxyServer;
 import net.md_5.bungee.api.connection.ProxiedPlayer;
+import net.md_5.bungee.api.event.TabCompleteEvent;
+
+import java.util.LinkedList;
+import java.util.List;
 
 public class JoinCommand extends SubCommand {
+
+    @Override
+    public List<String> complete(ProxiedPlayer player, String[] args) {
+        var manager = SimpleParty.getInstance().getPartyManager();
+        if(manager.getParty(player) != null) return List.of("");
+
+        List<String> list = new LinkedList<>();
+        manager.getPublic().forEach(party -> list.add(party.getLeader().getName()));
+        return args.length >= 3 ? List.of("") : list;
+    }
 
     @Override
     public void execute(ProxiedPlayer player, String[] args) {
